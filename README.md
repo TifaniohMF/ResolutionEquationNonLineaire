@@ -28,9 +28,9 @@ Le projet inclus les algorithmes suivants:
 ## 📋 Prérequis
 Pour exécuter ces scripts, vous devez avoir **Python 3.x** installer ainsi que les bibliothèques suivantes (si vous utilisez des fonctions mathématiques complexes et des graphiques)
 
-'''bash
+```bash
 pip install numpy matplotlib
-'''
+```
 ## 📁️ Structure de projet
 
 ```text
@@ -54,16 +54,16 @@ ResolutionSystemeLineaire/
 ## 💻 Installation et utilisation 
 1. Cloner le dépôt 
 
-'''bash
+```bash
 git clone https://github.com/TifaniohMF/ResolutionEquationNonLineaire.git
 cd ResolutionEquationNonLineaire
-'''
+```
 
 2. Exécuter un script 
 
-'''bash
+```bash
 python3 newton.py
-'''
+```
 
 ## 📊 Exemple de configuration 
 
@@ -77,19 +77,19 @@ Dans la plupart des scripts vous pouvez modifier les paramètres suivants :
 ## 🤝 Contribution
 Les contributions sont les bienvenus ! Si vous souhaite ajouter une méthode ou les améliorer les codes existant :
 1. Forkez le projet
-2. Créer votre branche de fonctionnalités 
-'''bash
+2. Créer votre branche de fonctionnalités
+```bash
 git checkout -b feature/Nouvelle méthode
-'''
-3. Commitet vos changements 
-'''bash
+```
+5. Commite vos changements
+```bash
 git commit -m "feat : ajout de la méthode X"
-'''
-4. Pushez vers la branche
-'"bash
+```
+7. Pushez vers la branche
+```bash
 git push origin feature/NouvelleMethode
-'''
-5. Ouvrez une pull requests
+```
+8. Ouvrez une pull requests
 
 ### Contact
 **TifaniohMF**- [Profil Github](https://github.com/TifaniohMF)
