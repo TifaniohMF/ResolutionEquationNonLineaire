@@ -37,18 +37,20 @@ pip install numpy matplotlib
 ResolutionSystemeLineaire/
 ├── README.md
 ├── docs
-│   ├── ResolutionEquationNonLineaire.pdf
-│   └── ResolutionEquationNonLineaire.tex
-└── src
-    ├── methode_dichotomie 
-    │   ├── dichotomie.ipynb
-    │   └── dichotomie.py
-    ├── methode_newton
-    │   ├── newton.ipynb
-    │   └── newton.py
-    └── methode_point_fixe
-        ├── point_fixe.ipynb
-        └── point_fixe.py
+│   ├── ResolutionEquationNonLineaire.pdf
+│   └── ResolutionEquationNonLineaire.tex
+├── src
+│   ├── methode_dichotomie
+│   │   ├── dichotomie.ipynb
+│   │   └── dichotomie.py
+│   ├── methode_newton
+│   │   ├── newton.ipynb
+│   │   └── newton.py
+│   └── methode_point_fixe
+│       ├── point_fixe.ipynb
+│       └── point_fixe.py
+├── requirements.txt
+└── tests.py
 ```
 
 ## 💻 Installation et utilisation 
