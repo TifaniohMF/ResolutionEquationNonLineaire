@@ -12,6 +12,7 @@
 \usepackage{theorem}
 \usepackage[french]{babel}
 
+\pagestyle{headings}
 
 \date{\today}
 \author{}
@@ -19,59 +20,72 @@
 
 \renewcommand{\familydefault}{\sfdefault}
 
+\theoremstyle{break}
+\theoremheaderfont{\scshape}
+\theorembodyfont{\upshape}
+\newtheorem{defin}{Définition}[subsection]
+\newtheorem{theo}[defin]{Théorème}
+\newtheorem{meth}[defin]{Méthode}
+\newtheorem{prop}[defin]{Proposition}
+
 % --------
 % DOCUMENT
 % --------
 
 \begin{document}
 \maketitle
-Le but est de decrire des algo pour résoudre des éauqtion non liniéaire de type $f(x)=0$.
+
+Le but est de decrire des algos pour résoudre des équation non liniéaire de type $f(x)=0$.
 
 \section{Séparation des zéros}
 Le prémier travail consiste à determiner des intervalles $[a_{i},b_{i}]$ tel que f possède une solution et un seul dans chaque intervalle.\\ La méthode la plus simple est d'utiliser une fonction continue strictement monotone sur  $[a_{i};b_{i}]$ tel que $f(a_{i})f(b_{i})<0$.(On suppose que f est continue et dérivable des fois)
-
-\subsection{Quelques algo classique}
-\subsubsection{La méthode de dichotomie (ou bissection)}
-Supposons que l'on a un zéros dans un intervalle $[a,b]$ (ie $f(a)f(b)<0$).
+\begin{center}\subsection{Quelques algos classique}\end{center}
+\begin{meth}[Dichotomie ou Bissection]
+Supposons que l'on a un zéros dans un intervalle $[a,b]$ (c'est-à-dire $f(a)f(b)<0$).
 \begin{itemize}
-    \item[-] Si $f(\frac{a+b}{2})=0$, on a trouve le zeros.
+    \item[-] Si $f(\frac{a+b}{2})=0$, on a trouvé le zeros.
     \item[-] Sinon le zeros se trouve dans $[a , \frac{a+b}{2}]$ soit dans $[\frac{a+b}{2} , b]$.
 \end{itemize}
+\end{meth}
 Il est clair qu'une répetition de ce procédée donne un encadrement de plus en plus precis du zéros chérché et fournit donc un algo de calcul du zéros.\\
-\textbf{Algo} (dichotomie)
+\textsc{Algorithme (dichotomie)} \\
 Soit $f:[a_{0},b_{0}] \rightarrow \mathbb{R}$ continue monotone tel que $f(a_{0})f(b_{0})<0$.\\ Pour $m=0,1,2,.....,N$ faire :\\ $m=\frac{a_{n}+b_{n}}{2}$
 \begin{itemize}
-    \item[-] Si $f(a_{n})f(m) \leq 0$$, $$a_{n+1}=a_{n}, b_{n+1}=m$
+    \item[-] Si $f(a_{n})f(m) \leq 0$, $a_{n+1}=a_{n}, b_{n+1}=m$
     \item[-] Sinon $a_{n+1}=m, b_{n+1}=b_{n}$
 \end{itemize}
 On a : $a_{n+1}-b_{n+1}=\frac{a_{n}-b_{n}}{2}$.\\ Soit $a_{n}-b_{n}=\frac{a_{0}-b_{0}}{2^{n}} \rightarrow 0$ \\ On peut choisir le temps d'arrêt $N$ pour que :\\ $\frac{a_{0}-b_{0}}{2^{N}} < \varepsilon$
 
-\subsubsection{Méthode de la sécante}
+\begin{meth}[Sécante]
 Soit $f$ adméttant un zéro dans l'intervalle $[x_{-1},x_{0}]$. Pour obtenir une prèmiere approximation $x_{1}$ de ce zéro,l'idée est de remplacer f par son interpolée linéaire sur $[x_{-1},x_{0}]$.\\ Soit par $$Y(x)=f(x_{0})+(x-x_{0})\frac{f(x_{0})-f(x_{-1})}{x_{0}-x_{-1}}$$ L'approximation $x_{1}$ est obtenu en résolvant $Y(x_{1})=0$ c'est-à-dire $$x_{1}=x_{0}-\frac{f(x_{0})(x_{0}-x_{-1})}{f(x_{0})-f(x_{-1})}$$
-Pour trouver une meilleur approximation, il suffit de répeter ce procédée a l'aide des points $(x_{n},x_{n+1})$\\
-\textbf{Algo}: \\Pour $n=0,1,2,.....$ $$x_{n+1}=x_{n}-\frac{f(x_{n})(x_{n}-x_{n-1})}{f(x_{n})-f(x_{n-1})}$$
-
-\subsubsection*{Critère d'arrêt}
+Pour trouver une meilleur approximation, il suffit de répeter ce procédée a l'aide des points $(x_{n},x_{n+1})$
+\end{meth}
+\textsc{Algorithme}: \\Pour $n=0,1,2,.....$ $$x_{n+1}=x_{n}-\frac{f(x_{n})(x_{n}-x_{n-1})}{f(x_{n})-f(x_{n-1})}$$
+\textsc{Critère d'arrêt} \\
 Une critère d'arrêt souvent utilisée consiste à choisir une tolérence $\varepsilon$ à terminer l'algo lorsque \\ $|x_{n+1}-x_{n}|<\varepsilon$
 
-\subsubsection{Méthode de Newton}
-Ici au lieu d'assimiler la courbe $y=f(x)$ à une sécante, on l'assimile à une tangente en un point $(x_{n},f(x_{n}))$, soit la droite d'équation $$Y=f(x_{0})+f'(x_{n})(x-x_{n})$$ \textbf{Algo} \\Pour n=0,1,2,..... $$x_{n+1}=x_{n}-\frac{f(x_{n})}{f'(x_{n})}$$
+\begin{meth}[Newton]
+Ici au lieu d'assimiler la courbe $y=f(x)$ à une sécante, on l'assimile à une tangente en un point $(x_{n},f(x_{n}))$, soit la droite d'équation $$Y=f(x_{0})+f'(x_{n})(x-x_{n})$$ \textsc{Algorithme} \\Pour n=0,1,2,..... $$x_{n+1}=x_{n}-\frac{f(x_{n})}{f'(x_{n})}$$
+\end{meth}
 
-\subsubsection{Methode de point fixe}
-Elle consiste d'abord à remplacer l'équation $f(x)=0$ par une équation $g(x)=x$ ayant même solution.\\
-\textbf{Algo} \\Pour n=0,1,2,..... \\$x_{n+1}=g(x_{n})$
+\begin{meth}[Point fixe]
+Elle consiste d'abord à remplacer l'équation $f(x)=0$ par une équation $g(x)=x$ ayant même solution.
+\end{meth}
+\textsc{Algorithme} \\Pour n=0,1,2,..... $$x_{n+1}=g(x_{n})$$
 
-\subsubsection*{Proposition}
+\begin{prop}
 Soit $g : [a, b] \rightarrow [a, b]$ une fonction continue et $x_{0}$ dans $[a, b]$. Si $x_{n}$ converge vers $x_{\infty}$ alors $x_{\infty} = g(x_{\infty})$.
+\end{prop}
 
-\subsection{Convergence des algo}
+\begin{center}\subsection{Convergence des algos}\end{center}
 Soit $g : [a, b] \mapsto [a, b]$ dérivable et tel que $|g^{'} (x)| \leq K$, $\forall x \in [a, b]$ avec $0 \leq K < 1$, alors pour tout $x_{0} \in [a, b]$, la suite définie par $x_{n+1} = g(x_{n})$, pour tout n converge vers l'unique point fixe de $g$.
 
-\subsubsection{Définition}
-Soient xn une suite convergente vers $x_{\infty}$, s'il existe $p \in \mathbb{N}$ et $c \not= 0$ tel que $$\lim_{x \to \infty}\frac{|x_{n+1} - x_{\infty}|}{|x_{n} - x_{\infty}|}=c$$
-On dit que la convergence est d'ordre p, "$c$" est appelée constante d'érreur asymptotique.
+\begin{defin}
+Soient $x_{n}$ une suite convergente vers $x_{\infty}$, s'il existe $p \in \mathbb{N}$ et $c \not= 0$ tel que $$\lim_{x \to \infty}\frac{|x_{n+1} - x_{\infty}|}{|x_{n} - x_{\infty}|}=c$$
+On dit que la convergence est d'ordre p, "c"est appelée constante d'érreur asymptotique.
+\end{defin}
 
-\subsection{Méthode de Newton : Le retour}
+\begin{meth}[Newton : Le retour]
 D'après la formule de Taylor d'ordre 2 en supposant $g$ suffisament régulière $$x_{n+1} - x_{\infty} = g(x_{n}) - g(x_{\infty})$$
 $$x_{n+1} - x_{\infty} = g(x_{n} - x_{\infty}) g^{'}(x_{\infty}) + \frac{(x_{n}-x_{\infty})^{2}g^{''}(\varepsilon_{n})}{2}$$ avec $\varepsilon \in [x_{n} , x_{\infty}]$ Pour n assez grand on a donc $x_{n+1} - x_{\infty} \simeq (x_{n} - x_{\infty})g ^{'} (x_{\infty})$ et vitesse de
 convergence est d'autant plus grande que $g^{'}(x_{\infty})$ est plus petit. Le cas le plus favorable est lorsque $g^{'}(x_{\infty}) = 0$ et si M est un majorant de $g^{''}(x)$ sur $[a, b]$.
@@ -79,26 +93,33 @@ On a $|x_{n+1} - x_{\infty} | \leq M \frac{|x_{n} - x_{\infty} |}{2}$.\\
 La convergence est alors d'ordre 2. Si on revient à la methode de Newton, on voit en fait qu'il s'agit d'un algo du point fixe pour la fonction $g(x) = x - \frac{f(x)}{f^{'}(x)}$
 La derivée de g est donnée par $g ^{'}(x) = \frac{f(x)f^{''}(x)}{(f^{'}(x))^{2}}$. Si $f^{'} (x_{\infty}) \not= 0$ on a $g^{'}(x_{\infty}) = 0$ car $f (x_{\infty} ) = 0$.
 Ceci montre que la méthode de Newton converge de façon quadratique (si elle converge).
+\end{meth}
 
-\subsection{Méthode de point fixe : Le retour}
+\begin{meth}[Point fixe : Le retour]
 Les résultats de ce paragraphe sont une généralisation en dimension 1. La fonction g à cette fois une fonction $g : \mathbb{R}^{n} \mapsto \mathbb{R}^{n}$ (ici on prend n = 2) et la variable $x \in \mathbb{R}^{2}$.
 Comme précedement on construit une suite définie par $$\left\{\begin{array}{cc} x^{0} & \mbox{ donnée } \\ x_{k+1} = g(x_{k}) & \end{array}\right.$$
 Quand tout ce passe bien cette suite converge vers $\hat{x}$ vérifiant $\hat{x} = g(\hat{x})$. On a donc besoin de généraliser la notion de fonction contractante.
+\end{meth}
 
-\subsubsection{Definition}
+\begin{defin}
 Soit $E \subset \mathbb{R}^{n}$, la fonction $g : \mathbb{R}^{n} \mapsto \mathbb{R}^{n}$ est dite contractante sur $E$ , $\exists \lambda \in [0, 1[$ tel que pour
 $$\forall  x, y \in E , \mbox{ on a } \|g(x) - g(y)\| \leq \lambda \|x - y \|$$
+\end{defin}
 
-\subsubsection{Théoreme (point fixe)}
+\begin{theo}[Point fixe]
 Soit $g : \mathbb{R}^{n} \mapsto \mathbb{R}^{n}$ contractante, alors il existe un unique $\hat{x} \in \mathbb{R}^{n}$ tel que $\hat{x} = g(\hat{x})$ et la suite (vecteurs) definie par
 $$\left\{\begin{array}{cc}x^{0} & \mbox{ donnée } \\ x^{k+1} = g(x^{k}) & \end{array}\right.$$ $k \geq 0$ converge vers $\hat{x}$
+\end{theo}
 
-\subsubsection{Définition}
-Une fonction $g : \mathbb{R}^{n} \mapsto \mathbb{R}^{n}$ est différentiable en $x$ si $g$ admet des derivées partielles en $x$ et si la matrice Jacobienne Dg (x) vérifie :
+\begin{defin}
+Une fonction $g : \mathbb{R}^{n} \mapsto \mathbb{R}^{n}$ est différentiable en $x$ si $g$ admet des derivées partielles en $x$ et si la matrice Jacobienne $D_{g} (x)$ vérifie :
 $$g(y) = g(x) + D_{g} (x)(y - x) + \|y - x\| \varepsilon(y - x)$$ où $\varepsilon(y - x) \rightarrow 0$ quand $y \rightarrow x$.
+\end{defin}
 
-\subsection{Méthode de Newton pour 2 équation non linéaire}
+\begin{meth}[Newton pour 2 équation non linéaire]
 On cherche à résoudre la systeme d'équation $f (x) = 0$. Comme pour le cas n = 1, l'idée de la méthode de Newton consiste à considérer l'approximation affne de $f$ en $x_{k}$.
 Si f est différentiable, le développement de Taylor donne : $$f (x_{k} + h) = f (x_{k}) + D_{f} (x_{k})h + \|h\| \varepsilon(h)$$
 On détermine le vecteur h tel que $$\left\|\begin{array}{ccc} f (x^{k} ) + D_{f} (x^{k})h & = & 0 \\ x^{k+1} & = & x^{k} + h \end{array}\right.$$
+\end{meth}
+
 \end{document}
