@@ -40,13 +40,17 @@ ResolutionSystemeLineaire/
 │   ├── ResolutionEquationNonLineaire.pdf
 │   └── ResolutionEquationNonLineaire.tex
 ├── src
+│        └── __init__.py
 │   ├── methode_dichotomie
+│   │   ├── __init__.py
 │   │   ├── dichotomie.ipynb
 │   │   └── dichotomie.py
 │   ├── methode_newton
+│   │     ├── __init__.py
 │   │   ├── newton.ipynb
 │   │   └── newton.py
 │   └── methode_point_fixe
+│       ├── __init__.py
 │       ├── point_fixe.ipynb
 │       └── point_fixe.py
 ├── requirements.txt
